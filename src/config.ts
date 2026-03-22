@@ -77,21 +77,21 @@ export const siteConfig: SiteConfig = {
   projects: [
     {
       name: "Tank Game",
-      description: "坦克游戏",
+      description: "坦克大战游戏",
       techStack: ["Next.js", "React", "Tailwind", "Supabase"],
       cover: "",
       link: "https://g-tank.vercel.app"
     },
     {
       name: "Fitness App",
-      description: "移动端健身追踪应用",
+      description: "运动健身记录应用",
       techStack: ["Vue 3", "Ionic", "Capacitor", "Supabase"],
       cover: "",
       link: "https://garcia-fit.vercel.app"
     },
     {
       name: "Photo Handler",
-      description: "照片处理工具",
+      description: "图片裁剪拼接工具",
       techStack: ["Next.js", "React", "Tailwind"],
       cover: "",
       link: "https://g-photo-handler.vercel.app"
