@@ -76,46 +76,32 @@ export const siteConfig: SiteConfig = {
 
   projects: [
     {
+      name: "Tank Game",
+      description: "坦克游戏",
+      techStack: ["Next.js", "React", "Tailwind", "Supabase"],
+      cover: "",
+      link: "https://g-tank.vercel.app"
+    },
+    {
       name: "Fitness App",
-      description: "移动端健身追踪应用，支持训练记录、数据分析",
+      description: "移动端健身追踪应用",
       techStack: ["Vue 3", "Ionic", "Capacitor", "Supabase"],
       cover: "",
-      link: "https://fitness.garcia.dev"
-    },
-    {
-      name: "Fit Stat",
-      description: "健身数据可视化平台，展示训练趋势和成就",
-      techStack: ["Next.js", "Recharts", "Supabase"],
-      cover: "",
-      link: "https://fitstat.garcia.dev"
-    },
-    {
-      name: "Fitness Manage",
-      description: "健身管理后台系统",
-      techStack: ["Next.js", "Tailwind", "Supabase"],
-      cover: "",
-      link: "https://manage.garcia.dev"
-    },
-    {
-      name: "Garcia 3D",
-      description: "3D可视化展示项目",
-      techStack: ["Next.js", "Three.js", "React Three Fiber"],
-      cover: "",
-      link: "https://3d.garcia.dev"
+      link: "https://garcia-fit.vercel.app"
     },
     {
       name: "Photo Handler",
       description: "照片处理工具",
-      techStack: ["Next.js", "Canvas API"],
+      techStack: ["Next.js", "React", "Tailwind"],
       cover: "",
-      link: "https://photo.garcia.dev"
+      link: "https://g-photo-handler.vercel.app"
     },
     {
-      name: "AI Nav Web",
-      description: "AI生成的个人导航页",
-      techStack: ["Vue 3", "Vite", "TypeScript", "Canvas"],
+      name: "导航页",
+      description: "个人导航页",
+      techStack: ["Vue 3", "Vite", "TypeScript"],
       cover: "",
-      link: "https://nav.garcia.dev"
+      link: "https://g-nav-web.vercel.app"
     }
   ],
 
