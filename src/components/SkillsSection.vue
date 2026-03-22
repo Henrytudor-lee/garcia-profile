@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { computed } from 'vue'
 import type { SkillCategory } from '../config'
 
-const props = defineProps<{
+defineProps<{
   skills: SkillCategory[]
 }>()
 
