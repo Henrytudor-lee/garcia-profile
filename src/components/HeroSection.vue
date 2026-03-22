@@ -83,7 +83,7 @@ onMounted(() => {
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--accent) 0%, #8b5cf6 100%);
+  background: linear-gradient(135deg, var(--color-blue) 0%, var(--color-purple) 50%, var(--color-rose) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -91,8 +91,26 @@ onMounted(() => {
   font-weight: 700;
   color: white;
   margin: 0 auto;
-  box-shadow: 0 20px 40px var(--shadow-strong);
+  box-shadow: 0 20px 40px var(--shadow-strong), 0 0 60px rgba(139, 92, 246, 0.3);
   animation: float 3s ease-in-out infinite;
+  position: relative;
+}
+
+.avatar-circle::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-blue), var(--color-purple), var(--color-rose));
+  z-index: -1;
+  opacity: 0.5;
+  filter: blur(10px);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
 }
 
 @keyframes float {
@@ -122,7 +140,10 @@ onMounted(() => {
 .hero-title {
   font-size: 1.5rem;
   font-weight: 500;
-  color: var(--accent);
+  background: linear-gradient(90deg, var(--color-blue), var(--color-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin-bottom: 1.5rem;
   opacity: 0;
   transform: translateY(20px);

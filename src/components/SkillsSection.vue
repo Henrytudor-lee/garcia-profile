@@ -1,9 +1,21 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import type { SkillCategory } from '../config'
 
-defineProps<{
+const props = defineProps<{
   skills: SkillCategory[]
 }>()
+
+const categoryColors: Record<string, string> = {
+  '前端开发': 'blue',
+  '后端开发': 'emerald',
+  '移动端': 'purple',
+  '工具/其他': 'orange'
+}
+
+const getCategoryColor = (name: string) => {
+  return categoryColors[name] || 'blue'
+}
 </script>
 
 <template>
@@ -16,6 +28,7 @@ defineProps<{
           v-for="category in skills"
           :key="category.name"
           class="skill-card"
+          :class="`card-${getCategoryColor(category.name)}`"
         >
           <h3 class="skill-category">{{ category.name }}</h3>
           <div class="skill-tags">
@@ -35,7 +48,7 @@ defineProps<{
 
 <style scoped>
 .skills {
-  background: var(--bg-secondary);
+  background: var(--bg-cool);
 }
 
 .skills-grid {
@@ -50,11 +63,31 @@ defineProps<{
   border-radius: 16px;
   border: 1px solid var(--border);
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
+
+.skill-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+}
+
+.skill-card.card-blue::before { background: var(--color-blue); }
+.skill-card.card-emerald::before { background: var(--color-emerald); }
+.skill-card.card-purple::before { background: var(--color-purple); }
+.skill-card.card-orange::before { background: var(--color-orange); }
 
 .skill-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 20px 40px var(--shadow);
+}
+
+.skill-card:hover::before {
+  width: 6px;
 }
 
 .skill-category {
@@ -63,8 +96,12 @@ defineProps<{
   color: var(--text-primary);
   margin-bottom: 1.5rem;
   padding-bottom: 0.75rem;
-  border-bottom: 2px solid var(--accent);
 }
+
+.card-blue .skill-category { color: var(--color-blue); }
+.card-emerald .skill-category { color: var(--color-emerald); }
+.card-purple .skill-category { color: var(--color-purple); }
+.card-orange .skill-category { color: var(--color-orange); }
 
 .skill-tags {
   display: flex;
@@ -84,9 +121,11 @@ defineProps<{
 }
 
 .skill-tag:hover {
-  background: var(--accent);
-  color: white;
-  border-color: var(--accent);
   transform: scale(1.05);
 }
+
+.card-blue .skill-tag:hover { background: var(--color-blue); color: white; border-color: var(--color-blue); }
+.card-emerald .skill-tag:hover { background: var(--color-emerald); color: white; border-color: var(--color-emerald); }
+.card-purple .skill-tag:hover { background: var(--color-purple); color: white; border-color: var(--color-purple); }
+.card-orange .skill-tag:hover { background: var(--color-orange); color: white; border-color: var(--color-orange); }
 </style>

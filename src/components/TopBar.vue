@@ -103,6 +103,10 @@ onMounted(() => {
   font-size: 1.25rem;
   font-weight: 700;
   color: var(--text-primary);
+  background: linear-gradient(135deg, var(--color-blue), var(--color-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .controls {

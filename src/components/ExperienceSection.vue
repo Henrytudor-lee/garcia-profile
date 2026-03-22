@@ -6,6 +6,13 @@ defineProps<{
   experiences: Experience[]
 }>()
 
+// Timeline dot colors
+const dotColors = ['blue', 'purple', 'emerald', 'indigo', 'rose']
+
+const getDotColor = (index: number) => {
+  return dotColors[index % dotColors.length]
+}
+
 // 滚动动画
 const visibleItems = ref<Set<number>>(new Set())
 
@@ -39,7 +46,7 @@ onMounted(() => {
           :key:="index"
           class="timeline-item"
           :data-index="index"
-          :class="{ visible: visibleItems.has(index) }"
+          :class="[`dot-${getDotColor(index)}`, { visible: visibleItems.has(index) }]"
         >
           <div class="timeline-dot"></div>
 
@@ -60,7 +67,7 @@ onMounted(() => {
 
 <style scoped>
 .experience {
-  background: var(--bg-secondary);
+  background: var(--bg-warm);
 }
 
 .timeline {
@@ -108,12 +115,16 @@ onMounted(() => {
   transform: translateX(-50%);
   width: 16px;
   height: 16px;
-  background: var(--accent);
   border-radius: 50%;
   border: 3px solid var(--bg-secondary);
-  box-shadow: 0 0 0 3px var(--accent);
   z-index: 1;
 }
+
+.dot-blue .timeline-dot { background: var(--color-blue); box-shadow: 0 0 0 3px var(--color-blue); }
+.dot-purple .timeline-dot { background: var(--color-purple); box-shadow: 0 0 0 3px var(--color-purple); }
+.dot-emerald .timeline-dot { background: var(--color-emerald); box-shadow: 0 0 0 3px var(--color-emerald); }
+.dot-indigo .timeline-dot { background: var(--color-indigo); box-shadow: 0 0 0 3px var(--color-indigo); }
+.dot-rose .timeline-dot { background: var(--color-rose); box-shadow: 0 0 0 3px var(--color-rose); }
 
 .timeline-content {
   background: var(--bg-card);

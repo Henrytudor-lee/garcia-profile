@@ -6,9 +6,26 @@ const props = defineProps<{
   projects: Project[]
 }>()
 
-const emit = defineEmits<{
-  (e: 'openDetail', project: Project): void
-}>()
+// Tech colors mapping
+const techColors: Record<string, string> = {
+  'Vue': 'emerald',
+  'React': 'cyan',
+  'Next.js': 'blue',
+  'TypeScript': 'blue',
+  'Node.js': 'emerald',
+  'Python': 'amber',
+  'Go': 'cyan',
+  'PostgreSQL': 'indigo',
+  'MongoDB': 'emerald',
+  'Redis': 'rose',
+  'Docker': 'blue',
+  'AWS': 'orange',
+  'Figma': 'purple'
+}
+
+const getTechColor = (tech: string) => {
+  return techColors[tech] || 'blue'
+}
 
 // 筛选状态
 const activeFilter = ref<string>('全部')
@@ -65,6 +82,20 @@ const openProject = (project: Project) => {
 const setCardRef = (el: HTMLElement | null, index: number) => {
   if (el) cardRefs.value[index] = el
 }
+
+// Cover gradient based on index
+const coverGradients = [
+  'linear-gradient(135deg, #3b82f6 0%, #6366f1 100%)',
+  'linear-gradient(135deg, #10b981 0%, #06b6d4 100%)',
+  'linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%)',
+  'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)',
+  'linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%)',
+  'linear-gradient(135deg, #f43f5e 0%, #8b5cf6 100%)'
+]
+
+const getCoverGradient = (index: number) => {
+  return coverGradients[index % coverGradients.length]
+}
 </script>
 
 <template>
@@ -96,7 +127,7 @@ const setCardRef = (el: HTMLElement | null, index: number) => {
           @mouseleave="handleMouseLeave(index)"
           @click="openProject(project)"
         >
-          <div class="project-cover">
+          <div class="project-cover" :style="{ background: getCoverGradient(index) }">
             <div class="project-icon">
               {{ project.name.charAt(0) }}
             </div>
@@ -111,6 +142,7 @@ const setCardRef = (el: HTMLElement | null, index: number) => {
                 v-for="tech in project.techStack"
                 :key="tech"
                 class="tech-badge"
+                :class="`badge-${getTechColor(tech)}`"
               >
                 {{ tech }}
               </span>
@@ -193,7 +225,6 @@ const setCardRef = (el: HTMLElement | null, index: number) => {
 
 .project-cover {
   height: 160px;
-  background: linear-gradient(135deg, var(--accent) 0%, #8b5cf6 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -250,10 +281,47 @@ const setCardRef = (el: HTMLElement | null, index: number) => {
 
 .tech-badge {
   padding: 0.25rem 0.75rem;
-  background: var(--bg-secondary);
   border-radius: 12px;
   font-size: 0.75rem;
-  color: var(--text-secondary);
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.badge-blue {
+  background: rgba(59, 130, 246, 0.15);
+  color: var(--color-blue);
+}
+.badge-cyan {
+  background: rgba(6, 182, 212, 0.15);
+  color: var(--color-cyan);
+}
+.badge-emerald {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--color-emerald);
+}
+.badge-purple {
+  background: rgba(139, 92, 246, 0.15);
+  color: var(--color-purple);
+}
+.badge-indigo {
+  background: rgba(99, 102, 241, 0.15);
+  color: var(--color-indigo);
+}
+.badge-amber {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--color-amber);
+}
+.badge-orange {
+  background: rgba(249, 115, 22, 0.15);
+  color: var(--color-orange);
+}
+.badge-rose {
+  background: rgba(244, 63, 94, 0.15);
+  color: var(--color-rose);
+}
+
+[data-theme="dark"] .tech-badge {
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .project-link {

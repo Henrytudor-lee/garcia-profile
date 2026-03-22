@@ -18,6 +18,15 @@ const getIconSvg = (icon: string) => {
   return icons[icon] || icons.blog
 }
 
+const getLinkColor = (icon: string) => {
+  const colors: Record<string, string> = {
+    github: 'github',
+    blog: 'purple',
+    email: 'rose'
+  }
+  return colors[icon] || 'blue'
+}
+
 const handleClick = (link: SocialLink) => {
   if (link.isEmail) {
     copyEmail(link.url.replace('mailto:', ''))
@@ -49,6 +58,7 @@ const copyEmail = async (email: string) => {
           v-for="link in socialLinks"
           :key="link.name"
           class="contact-btn"
+          :class="`btn-${getLinkColor(link.icon)}`"
           @click="handleClick(link)"
         >
           <svg
@@ -84,7 +94,7 @@ const copyEmail = async (email: string) => {
 
 <style scoped>
 .contact {
-  background: var(--bg-secondary);
+  background: var(--bg-accent);
   text-align: center;
 }
 
@@ -111,10 +121,31 @@ const copyEmail = async (email: string) => {
 }
 
 .contact-btn:hover {
-  border-color: var(--accent);
-  color: var(--accent);
   transform: translateY(-3px);
   box-shadow: 0 10px 20px var(--shadow);
+}
+
+.btn-github:hover {
+  border-color: #24292e;
+  color: #24292e;
+  background: #f6f8fa;
+}
+[data-theme="dark"] .btn-github:hover {
+  background: #24292e;
+  color: #f0f6fc;
+  border-color: #f0f6fc;
+}
+
+.btn-purple:hover {
+  border-color: var(--color-purple);
+  color: var(--color-purple);
+  background: rgba(139, 92, 246, 0.08);
+}
+
+.btn-rose:hover {
+  border-color: var(--color-rose);
+  color: var(--color-rose);
+  background: rgba(244, 63, 94, 0.08);
 }
 
 .contact-btn svg {

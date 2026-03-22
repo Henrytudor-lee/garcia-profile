@@ -4,31 +4,63 @@
 :root {
   /* 浅色主题 */
   --bg-primary: #ffffff;
-  --bg-secondary: #f8fafc;
+  --bg-secondary: #fafcfb;
   --bg-card: #ffffff;
+  --bg-card-hover: #f0fdf4;
   --text-primary: #1e293b;
-  --text-secondary: #64748b;
+  --text-secondary: #475569;
   --text-muted: #94a3b8;
   --accent: #3b82f6;
   --accent-hover: #2563eb;
   --border: #e2e8f0;
-  --shadow: rgba(0, 0, 0, 0.1);
-  --shadow-strong: rgba(0, 0, 0, 0.15);
+  --shadow: rgba(0, 0, 0, 0.06);
+  --shadow-strong: rgba(0, 0, 0, 0.12);
+
+  /* 语义颜色 - 浅色主题 */
+  --color-blue: #3b82f6;
+  --color-indigo: #6366f1;
+  --color-purple: #8b5cf6;
+  --color-rose: #f43f5e;
+  --color-orange: #f97316;
+  --color-emerald: #10b981;
+  --color-cyan: #06b6d4;
+  --color-amber: #f59e0b;
+
+  /* 背景微调 */
+  --bg-warm: oklch(98% 0.01 50);
+  --bg-cool: oklch(98% 0.01 240);
+  --bg-accent: oklch(98% 0.02 270);
 }
 
 [data-theme="dark"] {
   /* 深色主题 */
-  --bg-primary: #0f172a;
-  --bg-secondary: #1e293b;
-  --bg-card: #1e293b;
+  --bg-primary: #0c0f17;
+  --bg-secondary: #131a2b;
+  --bg-card: #1a2235;
+  --bg-card-hover: #1f2940;
   --text-primary: #f1f5f9;
   --text-secondary: #94a3b8;
   --text-muted: #64748b;
   --accent: #60a5fa;
-  --accent-hover: #3b82f6;
-  --border: #334155;
-  --shadow: rgba(0, 0, 0, 0.3);
-  --shadow-strong: rgba(0, 0, 0, 0.5);
+  --accent-hover: #93c5fd;
+  --border: #2d3a52;
+  --shadow: rgba(0, 0, 0, 0.4);
+  --shadow-strong: rgba(0, 0, 0, 0.6);
+
+  /* 语义颜色 - 深色主题 (更鲜艳以提高对比度) */
+  --color-blue: #60a5fa;
+  --color-indigo: #818cf8;
+  --color-purple: #a78bfa;
+  --color-rose: #fb7185;
+  --color-orange: #fb923c;
+  --color-emerald: #34d399;
+  --color-cyan: #22d3ee;
+  --color-amber: #fbbf24;
+
+  /* 背景微调 */
+  --bg-warm: oklch(15% 0.02 50);
+  --bg-cool: oklch(15% 0.02 240);
+  --bg-accent: oklch(15% 0.02 270);
 }
 
 * {
@@ -68,15 +100,20 @@ body {
   text-align: center;
   margin-bottom: 3rem;
   color: var(--text-primary);
+  position: relative;
+  display: inline-block;
+  width: 100%;
 }
 
 .section-title::after {
   content: '';
-  display: block;
+  position: absolute;
+  bottom: -0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
   width: 60px;
   height: 4px;
-  background: var(--accent);
-  margin: 1rem auto 0;
+  background: linear-gradient(90deg, var(--color-blue), var(--color-purple));
   border-radius: 2px;
 }
 

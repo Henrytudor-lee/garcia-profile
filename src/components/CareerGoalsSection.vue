@@ -4,6 +4,12 @@ import type { CareerGoal } from '../config'
 defineProps<{
   goals: CareerGoal[]
 }>()
+
+const goalColors = ['blue', 'emerald', 'purple', 'amber']
+
+const getGoalColor = (index: number) => {
+  return goalColors[index % goalColors.length]
+}
 </script>
 
 <template>
@@ -13,9 +19,10 @@ defineProps<{
 
       <div class="goals-grid">
         <div
-          v-for="goal in goals"
+          v-for="(goal, index) in goals"
           :key="goal.title"
           class="goal-card"
+          :class="`goal-${getGoalColor(index)}`"
         >
           <div class="goal-icon">{{ goal.icon }}</div>
           <h3 class="goal-title">{{ goal.title }}</h3>
@@ -52,13 +59,33 @@ defineProps<{
   border: 1px solid var(--border);
   text-align: center;
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
+
+.goal-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+}
+
+.goal-blue::before { background: linear-gradient(90deg, var(--color-blue), var(--color-cyan)); }
+.goal-emerald::before { background: linear-gradient(90deg, var(--color-emerald), var(--color-cyan)); }
+.goal-purple::before { background: linear-gradient(90deg, var(--color-purple), var(--color-rose)); }
+.goal-amber::before { background: linear-gradient(90deg, var(--color-amber), var(--color-orange)); }
 
 .goal-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 20px 40px var(--shadow);
-  border-color: var(--accent);
 }
+
+.goal-blue:hover { border-color: var(--color-blue); }
+.goal-emerald:hover { border-color: var(--color-emerald); }
+.goal-purple:hover { border-color: var(--color-purple); }
+.goal-amber:hover { border-color: var(--color-amber); }
 
 .goal-icon {
   font-size: 3rem;
@@ -94,10 +121,14 @@ defineProps<{
 .progress-fill {
   height: 100%;
   width: 70%;
-  background: linear-gradient(90deg, var(--accent) 0%, #8b5cf6 100%);
   border-radius: 3px;
   animation: progressGlow 2s ease-in-out infinite;
 }
+
+.goal-blue .progress-fill { background: linear-gradient(90deg, var(--color-blue), var(--color-cyan)); }
+.goal-emerald .progress-fill { background: linear-gradient(90deg, var(--color-emerald), var(--color-cyan)); }
+.goal-purple .progress-fill { background: linear-gradient(90deg, var(--color-purple), var(--color-rose)); }
+.goal-amber .progress-fill { background: linear-gradient(90deg, var(--color-amber), var(--color-orange)); }
 
 @keyframes progressGlow {
   0%, 100% {
